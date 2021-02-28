@@ -38,7 +38,7 @@ namespace CatchIoScriptImpl.Models
 
     abstract class ConsumableItem : Item
     {
-        public abstract void Consume();
+        public abstract void Consume(Player consumer);
     }
 
     abstract class OffensiveThrowableItem : ThrowableItem

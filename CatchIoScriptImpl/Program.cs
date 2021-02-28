@@ -6,7 +6,7 @@ namespace CatchIoScriptImpl
 {
     class Stone : OffensiveThrowableItem
     {
-        private readonly float _damageVal = 5;
+        private readonly float _damageVal = 13;
         public override float DamageVal { get { return _damageVal; } }
 
         public override void Throw()
@@ -17,9 +17,13 @@ namespace CatchIoScriptImpl
 
     class StaminaPotion : ConsumableItem
     {
-        public override void Consume()
+        public float healVal = 5f;
+
+        public override void Consume(Player consumer)
         {
+
             Console.WriteLine("Consuming Stamina Potion");
+            consumer.staminaVal += healVal;
         }
     }
 
@@ -53,13 +57,13 @@ namespace CatchIoScriptImpl
 
     class Player
     {
-        public string name;
+        public string name = "Coding God";
         public string charSkin;
 #nullable enable
         public Item? holdingItem;
 #nullable disable
         public float staminaVal = 0;
-        public float sanityVal = 0;
+        public float sanityVal = 10;
         public bool canControl;
         public bool CanBekilled
         {
@@ -87,7 +91,7 @@ namespace CatchIoScriptImpl
 
         public void ConsumeItem(ConsumableItem item)
         {
-            item.Consume();
+            item.Consume(this);
             RemoveHoldingItemAction();
         }
 
@@ -114,9 +118,30 @@ namespace CatchIoScriptImpl
             }
             else
             {
-                Console.WriteLine($"Player took {damage} damage");
+                if (staminaVal != 0)
+                {
+                    staminaVal = staminaVal - damage;
+                    if (staminaVal < 0)
+                    {
+                        sanityVal = sanityVal - Math.Abs(staminaVal);
+                        staminaVal = 0;
+                    }
+                }
+                else if (sanityVal != 0)
+                {
+                    sanityVal = sanityVal - damage;
+                    if (sanityVal < 0)
+                    {
+                        sanityVal = 0;
+                    }
+                }
             }
 
+        }
+
+        public void Draw()
+        {
+            Console.WriteLine($"Name : {name}, HoldingItem : {holdingItem} Stamina : {staminaVal}, Sanity : {sanityVal}");
         }
     }
 
@@ -222,12 +247,16 @@ namespace CatchIoScriptImpl
             inventoryController.Inv.AddItem(new Stone());
             inventoryController.Inv.AddItem(new StaminaPotion());
             inventoryController.Draw();
+            player.Draw();
 
             inventoryController.Update();
+            player.Draw();
             playerController.Update();
+            player.Draw();
             inventoryController.Draw();
 
             hitbox.OnTriggerEnter(new Stone());
+            player.Draw();
         }
     }
 }
