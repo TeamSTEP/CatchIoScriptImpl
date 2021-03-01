@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using CatchIoScriptImpl.Items;
 
-namespace CatchIoScriptImpl.Models
+namespace CatchIoScriptImpl.PlayerCharacter
 {
     class Inventory
     {
@@ -31,11 +32,7 @@ namespace CatchIoScriptImpl.Models
             // Set item index order zero to maxSize.
             if (_storeItemDictionary.Count > maxSize)
             {
-                Item[] storedItems = new Item[_storeItemDictionary.Count];
-                for (int i = 0; i < _storeItemDictionary.Count; i++)
-                {
-                    storedItems[i] = _storeItemDictionary[i];
-                }
+                Item[] storedItems = ToArray();
 
                 _storeItemDictionary.Clear();
 
@@ -58,20 +55,20 @@ namespace CatchIoScriptImpl.Models
             }
         }
 
-        public void RemoveItem(int index)
+        public void RemoveItem(int slotNo)
         {
-            // If inventory is empty and inventory doesn't contain index.
-            if (!IsEmpty() && _storeItemDictionary.ContainsKey(index))
+            if (GetItem(slotNo) != null)
             {
-                _storeItemDictionary.Remove(index);
+                _storeItemDictionary[slotNo] = null;
             }
         }
 
-        public Item GetItem(int index)
+        public Item GetItem(int slotNo)
         {
-            if (!IsEmpty() && _storeItemDictionary.ContainsKey(index))
+            // only if the inventory is not empty and contains an item
+            if (!IsEmpty() && _storeItemDictionary.ContainsKey(slotNo) && _storeItemDictionary[slotNo] != null)
             {
-                return _storeItemDictionary[index];
+                return _storeItemDictionary[slotNo];
             }
 
             return null;
@@ -79,6 +76,7 @@ namespace CatchIoScriptImpl.Models
 
         public bool IsFull()
         {
+            // note: we can have a null value for an existing key, so using count might not be effective
             return _storeItemDictionary.Count == _maxInventorySize - 1;
         }
 
@@ -87,13 +85,39 @@ namespace CatchIoScriptImpl.Models
             return _storeItemDictionary.Count == 0;
         }
 
+        public Item[] ToArray()
+        {
+            Item[] storedItems = new Item[_storeItemDictionary.Count];
+            for (int i = 1; i < _storeItemDictionary.Count; i++)
+            {
+                storedItems[i] = _storeItemDictionary[i];
+            }
+
+            return storedItems;
+        }
+
         public void Draw()
         {
+            /*
             for (int i = 0; i < _storeItemDictionary.Count; i++)
             {
                 Console.Write(_storeItemDictionary[i].ToString() + '\t');
             }
             Console.WriteLine();
+            */
+            Item[] invData = ToArray();
+            for (int i = 0; i < invData.Length; i++)
+            {
+                Item currentItem = invData[i];
+                if (currentItem == null)
+                {
+                    Console.WriteLine($"No item in slot {i + 1}");
+                }
+                else
+                {
+                    Console.WriteLine($"{invData[i]} in slot {i + 1}");
+                }
+            }
         }
     }
 }
