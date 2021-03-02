@@ -7,7 +7,8 @@ namespace CatchIoScriptImpl.PlayerCharacter
 {
     class Inventory
     {
-        private Dictionary<int, Item> _storeItemDictionary;
+        // note: the item slots are zero-indexed, but the UI will label them from slot 1
+        private readonly Dictionary<int, Item> _storeItemDictionary;
         private int _maxInventorySize;
 
         public Inventory(int maxInventorySize = 4)
@@ -88,7 +89,7 @@ namespace CatchIoScriptImpl.PlayerCharacter
         public Item[] ToArray()
         {
             Item[] storedItems = new Item[_storeItemDictionary.Count];
-            for (int i = 1; i < _storeItemDictionary.Count; i++)
+            for (int i = 0; i < _storeItemDictionary.Count; i++)
             {
                 storedItems[i] = _storeItemDictionary[i];
             }

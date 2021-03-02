@@ -25,7 +25,7 @@ namespace CatchIoScriptImpl.PlayerCharacter
         /// </summary>
         public void Update()
         {
-            // on keyboard down
+            // listen to user input
             int inputVal = UserInputHelper.GetItemSelectInput();
             SelectItem(inputVal);
         }

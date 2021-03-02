@@ -6,11 +6,6 @@ namespace CatchIoScriptImpl.Items
 {
     abstract class ThrowableItem : Item
     {
-        public float CalculateProjectileMovePoints(float startPos, float endPos)
-        {
-            return startPos * endPos;
-        }
-
         public virtual void Throw()
         {
             Console.WriteLine("Throwing Item");
