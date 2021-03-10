@@ -1,0 +1,15 @@
+name: PR Checks
+on: [pull_request]
+
+jobs:
+  check-code:
+    name: Checking Code Style
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run EditorConfig check
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
+      - run: dotnet tool install -g dotnet-format --version 5.0.142902 --add-source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json
+      - run: dotnet-format CatchIoScriptImpl -f --check -v diag
