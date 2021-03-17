@@ -5,7 +5,7 @@ using CatchIoScriptImpl.Items;
 
 namespace CatchIoScriptImpl.PlayerCharacter
 {
-    class Inventory
+    public class Inventory
     {
         // note: the item slots are zero-indexed, but the UI will label them from slot 1
         private readonly Dictionary<int, Item> _storeItemDictionary;

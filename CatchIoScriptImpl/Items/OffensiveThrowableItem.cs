@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// Copyright (c) Team STEP.  All Rights Reserved.
+
 using CatchIoScriptImpl.PlayerCharacter;
 
 namespace CatchIoScriptImpl.Items
 {
-    abstract class OffensiveThrowableItem : ThrowableItem
+    internal abstract class OffensiveThrowableItem : ThrowableItem
     {
         public abstract float DamageVal { get; }
 

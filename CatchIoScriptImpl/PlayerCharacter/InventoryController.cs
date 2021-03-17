@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// Copyright (c) Team STEP.  All Rights Reserved.
+
+using System;
 using CatchIoScriptImpl.Helpers;
 
 namespace CatchIoScriptImpl.PlayerCharacter
 {
-    class InventoryController
+    public class InventoryController
     {
         private readonly Player _player;
         public Inventory Inventory { get; private set; }
@@ -32,7 +32,7 @@ namespace CatchIoScriptImpl.PlayerCharacter
 
         public void SelectItem(int inputInvIndex)
         {
-            _player.holdingItem = Inventory.GetItem(inputInvIndex);
+            _player.HoldingItem = Inventory.GetItem(inputInvIndex);
             CurrentIndex = inputInvIndex;
             Console.WriteLine("Changed player's current item");
         }
@@ -40,7 +40,7 @@ namespace CatchIoScriptImpl.PlayerCharacter
         private void RemoveCurrentItem()
         {
             Inventory.RemoveItem(CurrentIndex);
-            _player.holdingItem = null;
+            _player.HoldingItem = null;
         }
 
         public void Draw()
