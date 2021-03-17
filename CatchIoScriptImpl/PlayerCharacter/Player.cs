@@ -7,28 +7,30 @@ namespace CatchIoScriptImpl.PlayerCharacter
 {
     public class Player
     {
-        public string Name = "Test Player";
-        public string CharSkin = "Druid_A";
+        public string Name { get; private set; } = "Test Player";
+        public string CharSkin { get; private set; } = "Druid_A";
 #nullable enable
         public Item? HoldingItem;
 #nullable disable
         public float StaminaVal = 0;
         public float SanityVal = 10;
         public bool CanControl = true;
+
+        // temporary logic
         public bool CanBeKilled => SanityVal == 0;
+        public float MeleeDamage { get; private set; } = 4f;
 
         public Action<Item> AddItemToInventoryAction;
         public Action RemoveHoldingItemAction;
 
         public void Attack(IDamageable other)
         {
-            float damage = 4f;
-
-            other.OnDamage(damage);
+            other.OnDamage(MeleeDamage);
         }
 
         public void ThrowItem(ThrowableItem item)
         {
+            item.OnThrow((1f, 1f), (5f, 5f));
             item.Throw();
             RemoveHoldingItemAction();
         }
@@ -41,15 +43,15 @@ namespace CatchIoScriptImpl.PlayerCharacter
 
         public void PickupItem(Item item)
         {
-            item.Pickup();
+            item.OnPickup();
             AddItemToInventoryAction(item);
         }
 
-        public void DiscardItem(Item item)
+        public void DiscardItem()
         {
             if (HoldingItem != null)
             {
-                item.Discard();
+                HoldingItem.OnDiscard();
                 HoldingItem = null;
             }
         }

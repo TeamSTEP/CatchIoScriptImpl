@@ -17,17 +17,22 @@ namespace CatchIoScriptImpl.PlayerCharacter
         {
             if (OnClickedUseItem())
             {
-                switch (_player.HoldingItem)
-                {
-                    case ThrowableItem item:
-                        _player.ThrowItem(item);
-                        break;
-                    case ConsumableItem item:
-                        _player.ConsumeItem(item);
-                        break;
-                    default:
-                        break;
-                }
+                UseItem(_player.HoldingItem);
+            }
+        }
+
+        public void UseItem(Item item)
+        {
+            switch (item)
+            {
+                case ThrowableItem ti:
+                    _player.ThrowItem(ti);
+                    break;
+                case ConsumableItem ci:
+                    _player.ConsumeItem(ci);
+                    break;
+                default:
+                    break;
             }
         }
 

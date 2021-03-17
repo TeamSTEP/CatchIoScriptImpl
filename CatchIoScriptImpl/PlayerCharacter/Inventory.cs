@@ -1,6 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Team STEP.  All Rights Reserved.
+
+using System;
 using System.Collections.Generic;
-using System.Text;
 using CatchIoScriptImpl.Items;
 
 namespace CatchIoScriptImpl.PlayerCharacter
