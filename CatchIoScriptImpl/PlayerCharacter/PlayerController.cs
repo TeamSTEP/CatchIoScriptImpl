@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// Copyright (c) Team STEP.  All Rights Reserved.
+
 using CatchIoScriptImpl.Items;
 
 namespace CatchIoScriptImpl.PlayerCharacter
 {
-    class PlayerController
+    public class PlayerController
     {
         private readonly Player _player;
 
@@ -18,7 +17,7 @@ namespace CatchIoScriptImpl.PlayerCharacter
         {
             if (OnClickedUseItem())
             {
-                switch (_player.holdingItem)
+                switch (_player.HoldingItem)
                 {
                     case ThrowableItem item:
                         _player.ThrowItem(item);

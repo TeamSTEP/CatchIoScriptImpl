@@ -1,12 +1,14 @@
-﻿using System;
+﻿// Copyright (c) Team STEP.  All Rights Reserved.
+
+using System;
 using CatchIoScriptImpl.Items;
 using CatchIoScriptImpl.PlayerCharacter;
 
 namespace CatchIoScriptImpl
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine("Starting game...");
             Player player = new Player();

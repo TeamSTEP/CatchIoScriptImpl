@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// Copyright (c) Team STEP.  All Rights Reserved.
 
 namespace CatchIoScriptImpl.PlayerCharacter
 {
-    interface IDamageable
+    public interface IDamageable
     {
 
         void OnDamage(float damage);

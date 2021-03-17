@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// Copyright (c) Team STEP.  All Rights Reserved.
+
+using System;
 using CatchIoScriptImpl.PlayerCharacter;
 
 namespace CatchIoScriptImpl.Items
 {
-    class StaminaPotion : ConsumableItem
+    public class StaminaPotion : ConsumableItem
     {
-        public float healVal = 5f;
+        public float HealVal = 5f;
 
         public override void Consume(Player consumer)
         {
 
             Console.WriteLine("Consuming Stamina Potion");
-            consumer.staminaVal += healVal;
+            consumer.StaminaVal += HealVal;
         }
     }
 }

@@ -1,8 +1,10 @@
-﻿using System;
+﻿// Copyright (c) Team STEP.  All Rights Reserved.
+
+using System;
 
 namespace CatchIoScriptImpl.Items
 {
-    abstract class Item
+    public abstract class Item
     {
         public void Pickup()
         {

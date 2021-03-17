@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// Copyright (c) Team STEP.  All Rights Reserved.
+
+using System;
 
 namespace CatchIoScriptImpl.Items
 {
-    abstract class ThrowableItem : Item
+    public abstract class ThrowableItem : Item
     {
         public virtual void Throw()
         {

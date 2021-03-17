@@ -1,25 +1,21 @@
-﻿using System;
+﻿// Copyright (c) Team STEP.  All Rights Reserved.
+
+using System;
 using CatchIoScriptImpl.Items;
 
 namespace CatchIoScriptImpl.PlayerCharacter
 {
-    class Player
+    public class Player
     {
-        public string name = "Test Player";
-        public string charSkin = "Druid_A";
+        public string Name = "Test Player";
+        public string CharSkin = "Druid_A";
 #nullable enable
-        public Item? holdingItem;
+        public Item? HoldingItem;
 #nullable disable
-        public float staminaVal = 0;
-        public float sanityVal = 10;
-        public bool canControl = true;
-        public bool CanBeKilled
-        {
-            get
-            {
-                return sanityVal == 0;
-            }
-        }
+        public float StaminaVal = 0;
+        public float SanityVal = 10;
+        public bool CanControl = true;
+        public bool CanBeKilled => SanityVal == 0;
 
         public Action<Item> AddItemToInventoryAction;
         public Action RemoveHoldingItemAction;
@@ -51,10 +47,10 @@ namespace CatchIoScriptImpl.PlayerCharacter
 
         public void DiscardItem(Item item)
         {
-            if (holdingItem != null)
+            if (HoldingItem != null)
             {
                 item.Discard();
-                holdingItem = null;
+                HoldingItem = null;
             }
         }
 
@@ -64,25 +60,25 @@ namespace CatchIoScriptImpl.PlayerCharacter
 
             if (CanBeKilled)
             {
-                Console.WriteLine($"Player {name} died!");
+                Console.WriteLine($"Player {Name} died!");
             }
             else
             {
-                if (staminaVal != 0)
+                if (StaminaVal != 0)
                 {
-                    staminaVal = staminaVal - damage;
-                    if (staminaVal < 0)
+                    StaminaVal = StaminaVal - damage;
+                    if (StaminaVal < 0)
                     {
-                        sanityVal = sanityVal - Math.Abs(staminaVal);
-                        staminaVal = 0;
+                        SanityVal = SanityVal - Math.Abs(StaminaVal);
+                        StaminaVal = 0;
                     }
                 }
-                else if (sanityVal != 0)
+                else if (SanityVal != 0)
                 {
-                    sanityVal = sanityVal - damage;
-                    if (sanityVal < 0)
+                    SanityVal = SanityVal - damage;
+                    if (SanityVal < 0)
                     {
-                        sanityVal = 0;
+                        SanityVal = 0;
                     }
                 }
             }
@@ -91,7 +87,7 @@ namespace CatchIoScriptImpl.PlayerCharacter
 
         public void Draw()
         {
-            Console.WriteLine($"Name : {name}, HoldingItem : {holdingItem}, Stamina : {staminaVal}, Sanity : {sanityVal}");
+            Console.WriteLine($"Name : {Name}, HoldingItem : {HoldingItem}, Stamina : {StaminaVal}, Sanity : {SanityVal}");
         }
     }
 }
