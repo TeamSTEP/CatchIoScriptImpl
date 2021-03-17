@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Team STEP.  All Rights Reserved.
 
-using CatchIoScriptImpl.ProjectileMotion;
 using System;
+using CatchIoScriptImpl.ProjectileMotion;
 
 namespace CatchIoScriptImpl.Items
 {
