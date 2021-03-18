@@ -2,7 +2,6 @@
 
 using System;
 using CatchIoScriptImpl.Items;
-using CatchIoScriptImpl.ProjectileMotion;
 
 namespace CatchIoScriptImpl.PlayerCharacter
 {
@@ -10,9 +9,7 @@ namespace CatchIoScriptImpl.PlayerCharacter
     {
         public string Name { get; private set; } = "Test Player";
         public string CharSkin { get; private set; } = "Druid_A";
-#nullable enable
-        public Item? HoldingItem;
-#nullable disable
+        public Item HoldingItem { get; set; }
         public float StaminaVal { get; private set; } = 0;
         public float SanityVal { get; private set; } = 10;
         public bool CanControl { get; private set; } = true;
@@ -29,9 +26,10 @@ namespace CatchIoScriptImpl.PlayerCharacter
             other.OnDamage(MeleeDamage);
         }
 
-        public void ThrowItem(IThrowable throwObj)
+        public void ThrowItem(ThrowableItem item, (float, float) targetPos)
         {
-            throwObj.OnBeforeThrow((1f, 1f), (5f, 5f));
+            // enable item game object and do other operations to shoot the item prefab
+            item.OnBeforeThrow((1f, 1f), targetPos);
             //item.Throw();
             RemoveHoldingItemAction();
         }

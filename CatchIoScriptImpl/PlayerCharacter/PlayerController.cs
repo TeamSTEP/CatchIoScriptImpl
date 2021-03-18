@@ -21,6 +21,7 @@ namespace CatchIoScriptImpl.PlayerCharacter
 
             if (OnClickedUseItem())
             {
+
                 UseItem(_player.HoldingItem);
             }
         }
@@ -30,7 +31,7 @@ namespace CatchIoScriptImpl.PlayerCharacter
             switch (item)
             {
                 case ThrowableItem ti:
-                    _player.ThrowItem(ti);
+                    _player.ThrowItem(ti, (4f, 4f));
                     break;
                 case ConsumableItem ci:
                     _player.ConsumeItem(ci);
@@ -40,7 +41,12 @@ namespace CatchIoScriptImpl.PlayerCharacter
             }
         }
 
-        public void RenderAimTrajectory((float, float, float)[] throwPath)
+        public (float, float)[] CalculateTrajectory(float timeToTarget, (float, float, float) initalVelocity)
+        {
+            return new (float, float)[0];
+        }
+
+        public void RenderAimTrajectory((float, float)[] throwPath)
         {
             Console.WriteLine($"Throwing to {throwPath}");
         }
