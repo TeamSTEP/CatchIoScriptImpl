@@ -15,17 +15,19 @@ namespace CatchIoScriptImpl.Items
         {
 
             Console.WriteLine("Consuming Stamina Potion");
-            consumer.StaminaVal += HealVal;
+            consumer.HealStamina(HealVal);
         }
 
         public override void OnPickup()
         {
             Console.WriteLine("Picking Up Stamina Potion");
+            base.OnPickup();
         }
 
         public override void OnDiscard()
         {
             Console.WriteLine("Discarding Stamina Potion");
+            base.OnPickup();
         }
     }
 }

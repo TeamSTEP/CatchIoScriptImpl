@@ -16,6 +16,9 @@ namespace CatchIoScriptImpl.PlayerCharacter
 
         public void Update()
         {
+            if (!_player.CanControl)
+                return;
+
             if (OnClickedUseItem())
             {
                 UseItem(_player.HoldingItem);

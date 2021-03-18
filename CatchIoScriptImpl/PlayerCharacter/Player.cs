@@ -13,9 +13,9 @@ namespace CatchIoScriptImpl.PlayerCharacter
 #nullable enable
         public Item? HoldingItem;
 #nullable disable
-        public float StaminaVal = 0;
-        public float SanityVal = 10;
-        public bool CanControl = true;
+        public float StaminaVal { get; private set; } = 0;
+        public float SanityVal { get; private set; } = 10;
+        public bool CanControl { get; private set; } = true;
 
         // temporary logic
         public bool CanBeKilled => SanityVal == 0;
@@ -44,13 +44,16 @@ namespace CatchIoScriptImpl.PlayerCharacter
 
         public void PickupItem(Item item)
         {
+            // corner case checking
+            if (item.IsStored)
+                return;
             item.OnPickup();
             AddItemToInventoryAction(item);
         }
 
-        public void DiscardItem()
+        public void DiscardHoldingItem()
         {
-            if (HoldingItem != null)
+            if (HoldingItem != null && HoldingItem.IsStored)
             {
                 HoldingItem.OnDiscard();
                 HoldingItem = null;
@@ -85,7 +88,21 @@ namespace CatchIoScriptImpl.PlayerCharacter
                     }
                 }
             }
+        }
 
+        public void HealStamina(float healVal)
+        {
+            // todo: move this value
+            float maxStamina = 10f;
+
+            if (StaminaVal + healVal < maxStamina)
+            {
+                StaminaVal += healVal;
+            }
+            else
+            {
+                StaminaVal = maxStamina;
+            }
         }
 
         public void Draw()

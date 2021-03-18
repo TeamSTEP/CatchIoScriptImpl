@@ -25,6 +25,8 @@ namespace CatchIoScriptImpl.PlayerCharacter
         /// </summary>
         public void Update()
         {
+            if (!_player.CanControl)
+                return;
             // listen to user input
             int inputVal = UserInputHelper.GetItemSelectInput();
             SelectItem(inputVal);

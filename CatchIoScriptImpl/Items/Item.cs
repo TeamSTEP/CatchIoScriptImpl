@@ -4,9 +4,21 @@ namespace CatchIoScriptImpl.Items
 {
     public abstract class Item
     {
-        public abstract void OnPickup();
+        public virtual bool IsStored => _isStored;
 
-        public abstract void OnDiscard();
+        private bool _isStored = false;
+
+        public virtual void OnPickup()
+        {
+            if (!_isStored)
+                _isStored = true;
+        }
+
+        public virtual void OnDiscard()
+        {
+            if (_isStored)
+                _isStored = false;
+        }
     }
 
 }

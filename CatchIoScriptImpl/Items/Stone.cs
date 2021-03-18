@@ -19,11 +19,13 @@ namespace CatchIoScriptImpl.Items
         public override void OnPickup()
         {
             Console.WriteLine("Picking Up Stone Item");
+            base.OnPickup();
         }
 
         public override void OnDiscard()
         {
             Console.WriteLine("Discarding Stamina Potion");
+            base.OnDiscard();
         }
 
         public override TrajectoryArc CalculateTrajectory((float, float) throwPos, (float, float) targetPos)
