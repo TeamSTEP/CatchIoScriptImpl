@@ -8,7 +8,7 @@ namespace CatchIoScriptImpl.ProjectileMotion
 
         void OnLanded((float, float) landPos);
 
-        void OnThrow((float, float) throwPos, (float, float) targetPos);
+        void OnBeforeThrow((float, float) throwPos, (float, float) targetPos);
 
         TrajectoryArc CalculateTrajectory((float, float) throwPos, (float, float) targetPos);
 

@@ -2,6 +2,7 @@
 
 using System;
 using CatchIoScriptImpl.Items;
+using CatchIoScriptImpl.ProjectileMotion;
 
 namespace CatchIoScriptImpl.PlayerCharacter
 {
@@ -28,10 +29,10 @@ namespace CatchIoScriptImpl.PlayerCharacter
             other.OnDamage(MeleeDamage);
         }
 
-        public void ThrowItem(ThrowableItem item)
+        public void ThrowItem(IThrowable throwObj)
         {
-            item.OnThrow((1f, 1f), (5f, 5f));
-            item.Throw();
+            throwObj.OnBeforeThrow((1f, 1f), (5f, 5f));
+            //item.Throw();
             RemoveHoldingItemAction();
         }
 

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Team STEP.  All Rights Reserved.
 
+using System;
 using CatchIoScriptImpl.Items;
 
 namespace CatchIoScriptImpl.PlayerCharacter
@@ -36,6 +37,15 @@ namespace CatchIoScriptImpl.PlayerCharacter
             }
         }
 
+        public void RenderAimTrajectory((float, float, float)[] throwPath)
+        {
+            Console.WriteLine($"Throwing to {throwPath}");
+        }
+
+        /// <summary>
+        /// Test method to trigger the Use Item command
+        /// </summary>
+        /// <returns></returns>
         private bool OnClickedUseItem()
         {
             return true;

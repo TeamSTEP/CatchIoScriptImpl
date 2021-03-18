@@ -16,11 +16,6 @@ namespace CatchIoScriptImpl.Items
 
         private bool _hasLanded = false;
 
-        public override void Throw()
-        {
-            Console.WriteLine("Throwing stone");
-        }
-
         public override void OnPickup()
         {
             Console.WriteLine("Picking Up Stone Item");
@@ -44,7 +39,7 @@ namespace CatchIoScriptImpl.Items
             }
         }
 
-        public override void OnThrow((float, float) throwPos, (float, float) targetPos)
+        public override void OnBeforeThrow((float, float) throwPos, (float, float) targetPos)
         {
             Console.WriteLine($"Throwing Stone from {throwPos} to {targetPos}");
         }
