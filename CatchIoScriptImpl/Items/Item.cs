@@ -1,19 +1,23 @@
 ﻿// Copyright (c) Team STEP.  All Rights Reserved.
 
-using System;
-
 namespace CatchIoScriptImpl.Items
 {
     public abstract class Item
     {
-        public void Pickup()
+        public virtual bool IsStored => _isStored;
+
+        private bool _isStored = false;
+
+        public virtual void OnPickup()
         {
-            Console.WriteLine("Picking Up Item");
+            if (!_isStored)
+                _isStored = true;
         }
 
-        public void Discard()
+        public virtual void OnDiscard()
         {
-            Console.WriteLine("Discarding Item");
+            if (_isStored)
+                _isStored = false;
         }
     }
 

@@ -27,7 +27,13 @@ namespace CatchIoScriptImpl
             player.Draw();
             inventoryController.Draw();
 
+            Stone randomStone = new Stone();
+
+            player.PickupItem(randomStone);
+            inventoryController.Draw();
+
             hitbox.OnTriggerEnter(new Stone());
+            inventoryController.SelectItem(2);
             player.Draw();
         }
     }

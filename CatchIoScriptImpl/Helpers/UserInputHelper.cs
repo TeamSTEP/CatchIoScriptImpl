@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// Copyright (c) Team STEP.  All Rights Reserved.
 
 namespace CatchIoScriptImpl.Helpers
 {
-    static class UserInputHelper
+    public static class UserInputHelper
     {
         public static (float, float) GetMovementDirectionInput()
         {

@@ -4,7 +4,7 @@ using CatchIoScriptImpl.PlayerCharacter;
 
 namespace CatchIoScriptImpl.Items
 {
-    internal abstract class OffensiveThrowableItem : ThrowableItem
+    public abstract class OffensiveThrowableItem : ThrowableItem
     {
         public abstract float DamageVal { get; }
 

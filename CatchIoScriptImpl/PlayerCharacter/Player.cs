@@ -7,29 +7,30 @@ namespace CatchIoScriptImpl.PlayerCharacter
 {
     public class Player
     {
-        public string Name = "Test Player";
-        public string CharSkin = "Druid_A";
-#nullable enable
-        public Item? HoldingItem;
-#nullable disable
-        public float StaminaVal = 0;
-        public float SanityVal = 10;
-        public bool CanControl = true;
+        public string Name { get; private set; } = "Test Player";
+        public string CharSkin { get; private set; } = "Druid_A";
+        public Item HoldingItem { get; set; }
+        public float StaminaVal { get; private set; } = 0;
+        public float SanityVal { get; private set; } = 10;
+        public bool CanControl { get; private set; } = true;
+
+        // temporary logic
         public bool CanBeKilled => SanityVal == 0;
+        public float MeleeDamage { get; private set; } = 4f;
 
         public Action<Item> AddItemToInventoryAction;
         public Action RemoveHoldingItemAction;
 
         public void Attack(IDamageable other)
         {
-            float damage = 4f;
-
-            other.OnDamage(damage);
+            other.OnDamage(MeleeDamage);
         }
 
-        public void ThrowItem(ThrowableItem item)
+        public void ThrowItem(ThrowableItem item, (float, float) targetPos)
         {
-            item.Throw();
+            // enable item game object and do other operations to shoot the item prefab
+            item.OnBeforeThrow((1f, 1f), targetPos);
+            //item.Throw();
             RemoveHoldingItemAction();
         }
 
@@ -41,15 +42,18 @@ namespace CatchIoScriptImpl.PlayerCharacter
 
         public void PickupItem(Item item)
         {
-            item.Pickup();
+            // corner case checking
+            if (item.IsStored)
+                return;
+            item.OnPickup();
             AddItemToInventoryAction(item);
         }
 
-        public void DiscardItem(Item item)
+        public void DiscardHoldingItem()
         {
-            if (HoldingItem != null)
+            if (HoldingItem != null && HoldingItem.IsStored)
             {
-                item.Discard();
+                HoldingItem.OnDiscard();
                 HoldingItem = null;
             }
         }
@@ -82,7 +86,21 @@ namespace CatchIoScriptImpl.PlayerCharacter
                     }
                 }
             }
+        }
 
+        public void HealStamina(float healVal)
+        {
+            // todo: move this value
+            float maxStamina = 10f;
+
+            if (StaminaVal + healVal < maxStamina)
+            {
+                StaminaVal += healVal;
+            }
+            else
+            {
+                StaminaVal = maxStamina;
+            }
         }
 
         public void Draw()

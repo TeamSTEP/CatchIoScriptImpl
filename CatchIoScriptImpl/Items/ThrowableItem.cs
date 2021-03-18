@@ -1,19 +1,18 @@
 ﻿// Copyright (c) Team STEP.  All Rights Reserved.
 
-using System;
+using CatchIoScriptImpl.ProjectileMotion;
 
 namespace CatchIoScriptImpl.Items
 {
-    public abstract class ThrowableItem : Item
+    public abstract class ThrowableItem : Item, IThrowable
     {
-        public virtual void Throw()
-        {
-            Console.WriteLine("Throwing Item");
-        }
+        // temporary value to represent the Rigidbody2D class in Unity
+        public abstract string Rigidbody { get; }
+        public abstract bool IsOnFloor { get; }
 
-        public virtual void OnLanded()
-        {
-            Console.WriteLine("Item has landed");
-        }
+        public abstract TrajectoryArc CalculateTrajectory((float, float) throwPos, (float, float) targetPos);
+        public abstract void OnLanded((float, float) landPos);
+        public abstract void OnBeforeThrow((float, float) throwPos, (float, float) targetPos);
+
     }
 }

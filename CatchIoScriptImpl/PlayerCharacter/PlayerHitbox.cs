@@ -6,6 +6,7 @@ namespace CatchIoScriptImpl.PlayerCharacter
 {
     public class PlayerHitbox : IDamageable
     {
+        // cache the Player component on start
         private readonly Player _player;
 
         public PlayerHitbox(Player owner)
@@ -16,10 +17,12 @@ namespace CatchIoScriptImpl.PlayerCharacter
         public void OnDamage(float damage)
         {
             _player.TakeDamage(damage);
+            // todo: add other damage effects
         }
 
         public void OnTriggerEnter(object other)
         {
+            // pattern matching an object in the collision check method might be horrible for performance
             switch (other)
             {
                 case OffensiveThrowableItem item:
